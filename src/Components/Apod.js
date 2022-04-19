@@ -6,9 +6,11 @@ import Loading from "./Loading";
 const Apod = () => {
   const [content, setContent] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [startDate, setStartDate] = useState("2021-05-29");
+  const [endDate, setEndDate] = useState("2021-06-10");
   useEffect(() => {
     fetch(
-      `https://api.nasa.gov/planetary/apod?api_key=${process.env.REACT_APP_API_KEY}&start_date=2021-05-29&end_date=2021-06-01`
+      `https://api.nasa.gov/planetary/apod?api_key=${process.env.REACT_APP_API_KEY}&start_date=${startDate}&end_date=${endDate}`
     )
       .then((res) => {
         return res.json();
@@ -19,6 +21,19 @@ const Apod = () => {
         setLoading(false);
       });
   }, []);
+  const fetchData = async () => {
+    const test = await fetch(
+      `https://api.nasa.gov/planetary/apod?api_key=${process.env.REACT_APP_API_KEY}&start_date=${startDate}&end_date=${endDate}`
+    );
+    const result = await test.json();
+    console.log(result);
+    setContent(result);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    fetchData();
+  };
 
   return (
     <>
@@ -27,6 +42,27 @@ const Apod = () => {
       ) : (
         <>
           <Wrapper>
+            <header>
+              <form onSubmit={handleSubmit}>
+                <label>Enter Start Date after 1995-06-16</label>
+                <input
+                  type="text"
+                  placeholder="YYYY-MM-DD"
+                  onChange={(e) => {
+                    setStartDate(e.target.value);
+                  }}
+                />
+                <label>Enter End Date</label>
+                <input
+                  type="text"
+                  placeholder="YYYY-MM-DD"
+                  onChange={(e) => {
+                    setEndDate(e.target.value);
+                  }}
+                />
+                <button type="submit">Submit</button>
+              </form>
+            </header>
             <PhotoWrapper>
               {content.map((val) => (
                 <ImageBox>
