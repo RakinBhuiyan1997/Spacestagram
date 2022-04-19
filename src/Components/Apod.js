@@ -41,47 +41,44 @@ const Apod = () => {
         <Loading />
       ) : (
         <>
-          <Wrapper>
-            <header>
-              <form onSubmit={handleSubmit}>
-                <label>Enter Start Date after 1995-06-16</label>
-                <input
-                  type="text"
-                  placeholder="YYYY-MM-DD"
-                  onChange={(e) => {
-                    setStartDate(e.target.value);
-                  }}
-                />
-                <label>Enter End Date</label>
-                <input
-                  type="text"
-                  placeholder="YYYY-MM-DD"
-                  onChange={(e) => {
-                    setEndDate(e.target.value);
-                  }}
-                />
-                <button type="submit">Submit</button>
-              </form>
-            </header>
-            <PhotoWrapper>
-              {content.map((val) => (
-                <ImageBox>
-                  <Image src={val.hdurl ? val.hdurl : val.url} />
-                  <Title>{val.title}</Title>
-                  <Date>Photo Taken: {val.date}</Date>
-                  <Description>{val.explanation}</Description>
-                  <LikeButton />
-                </ImageBox>
-              ))}
-            </PhotoWrapper>
-          </Wrapper>
+          <header>
+            <form onSubmit={handleSubmit}>
+              <label>Enter Start Date after 1995-06-16</label>
+              <input
+                type="text"
+                placeholder="YYYY-MM-DD"
+                onChange={(e) => {
+                  setStartDate(e.target.value);
+                }}
+              />
+              <label>Enter End Date</label>
+              <input
+                type="text"
+                placeholder="YYYY-MM-DD"
+                onChange={(e) => {
+                  setEndDate(e.target.value);
+                }}
+              />
+              <button type="submit">Submit</button>
+            </form>
+          </header>
+          <PhotoWrapper>
+            {content.map((val) => (
+              <ImageBox>
+                <Image src={val.hdurl ? val.hdurl : val.url} />
+                <Title>{val.title}</Title>
+                <Date>Photo Taken: {val.date}</Date>
+                <Description>{val.explanation}</Description>
+                <LikeButton />
+              </ImageBox>
+            ))}
+          </PhotoWrapper>
         </>
       )}
     </>
   );
 };
 
-const Wrapper = styled.div``;
 const PhotoWrapper = styled.div`
   display: flex;
   flex-flow: row wrap;
