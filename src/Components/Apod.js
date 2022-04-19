@@ -16,7 +16,6 @@ const Apod = () => {
         return res.json();
       })
       .then((data) => {
-        console.log(data);
         setContent(data);
         setLoading(false);
       });
