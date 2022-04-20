@@ -1,23 +1,29 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 
 const LikeButton = () => {
   const [liked, setLiked] = useState(false);
-  const [btnContent, setBtnContent] = useState("Like");
+
   const like = (e) => {
-    if (liked === true) {
-      setLiked(false);
-      setBtnContent("Liked");
-    } else {
+    if (liked === false) {
       setLiked(true);
-      setBtnContent("Like");
+    } else {
+      setLiked(false);
     }
   };
   return (
-    <button className="btn btn-primary" onClick={like}>
-      {btnContent}
-    </button>
+    <Button onClick={like}>
+      {liked && <AiFillHeart color="red" size={40} />}
+      {!liked && <AiOutlineHeart size={40} />}
+    </Button>
   );
 };
+
+const Button = styled.button`
+  cursor: pointer;
+  border: none;
+  background-color: white;
+`;
 
 export default LikeButton;

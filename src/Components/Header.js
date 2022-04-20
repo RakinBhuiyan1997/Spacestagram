@@ -17,16 +17,21 @@ const Header = () => {
 const Title = styled.h1`
   padding: 0px;
   width: 200px;
-  background-color: blue;
+  color: white;
 `;
 const Author = styled.h2`
   text-align: right;
   padding: 0px;
   width: 300px;
-  background-color: red;
+  font-style: italic;
+  color: white;
 `;
 const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   border-bottom: 3px solid black;
+  background-color: black;
 `;
 
 export default Header;

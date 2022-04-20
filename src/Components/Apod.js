@@ -25,7 +25,6 @@ const Apod = () => {
       `https://api.nasa.gov/planetary/apod?api_key=${process.env.REACT_APP_API_KEY}&start_date=${startDate}&end_date=${endDate}`
     );
     const result = await test.json();
-    console.log(result);
     setContent(result);
   };
 
@@ -40,34 +39,36 @@ const Apod = () => {
         <Loading />
       ) : (
         <>
-          <header>
-            <form onSubmit={handleSubmit}>
-              <label>Enter Start Date after 1995-06-16</label>
-              <input
+          <Header>
+            <Form onSubmit={handleSubmit}>
+              <Label>Enter Start Date after 1995-06-16</Label>
+              <Input
                 type="text"
                 placeholder="YYYY-MM-DD"
                 onChange={(e) => {
                   setStartDate(e.target.value);
                 }}
               />
-              <label>Enter End Date</label>
-              <input
+              <Label>Enter End Date</Label>
+              <Input
                 type="text"
                 placeholder="YYYY-MM-DD"
                 onChange={(e) => {
                   setEndDate(e.target.value);
                 }}
               />
-              <button type="submit">Submit</button>
-            </form>
-          </header>
+              <Button type="submit">Submit</Button>
+            </Form>
+          </Header>
           <PhotoWrapper>
             {content.map((val) => (
               <ImageBox>
                 <Image src={val.hdurl ? val.hdurl : val.url} />
                 <Title>{val.title}</Title>
                 <Date>Photo Taken: {val.date}</Date>
-                <Description>{val.explanation}</Description>
+                <Description>
+                  <Span>Description:</Span> {val.explanation}
+                </Description>
                 <LikeButton />
               </ImageBox>
             ))}
@@ -77,6 +78,10 @@ const Apod = () => {
     </>
   );
 };
+
+const Header = styled.header`
+  background-color: #f6f6f7;
+`;
 
 const PhotoWrapper = styled.div`
   display: flex;
@@ -102,8 +107,54 @@ const Image = styled.img`
   margin-bottom: 10px;
   border-radius: 5px;
 `;
+const Span = styled.span`
+  text-decoration: underline;
+  font-weight: bold;
+`;
 const Title = styled.h2``;
-const Description = styled.p``;
-const Date = styled.p``;
+const Description = styled.p`
+  margin-top: 10px;
+  line-height: 30px;
+`;
+const Date = styled.p`
+  font-style: italic;
+  color: grey;
+  font-weight: bold;
+`;
+
+const Form = styled.form`
+  position: relative;
+
+  text-align: center;
+`;
+
+const Label = styled.label`
+  margin: 20px;
+  font-style: italic;
+  font-weight: bold;
+`;
+
+const Input = styled.input`
+  border: none;
+  border-bottom: 1px solid black;
+  text-align: center;
+  background-color: #f6f6f7;
+`;
+
+const Button = styled.button`
+  margin: 20px;
+  border: 1px solid black;
+  border-radius: 5px;
+  height: 30px;
+  width: 80px;
+  outline: none;
+  cursor: pointer;
+  color: white;
+  background-color: black;
+
+  :hover {
+    border: 1px solid red;
+  }
+`;
 
 export default Apod;
