@@ -7,7 +7,6 @@ const Header = () => {
       <header>
         <Container>
           <Title>Spacetagram</Title>
-          <Author>Developed by Rakin Bhuiyan</Author>
         </Container>
       </header>
     </>
@@ -28,10 +27,12 @@ const Author = styled.h2`
 `;
 const Container = styled.div`
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  border-bottom: 3px solid black;
-  background-color: black;
+  overflow: scroll;
+
+  background-image: linear-gradient(to bottom right, black, blue);
+  height: 100px;
 `;
 
 export default Header;
