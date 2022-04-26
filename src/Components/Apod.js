@@ -40,11 +40,13 @@ const Apod = () => {
     const result = await test.json();
     //Once the data is fetched, setContent will set the data into the variable content.
     setContent(result);
+    setLoading(false);
   };
 
   //Here is the function that will run fetchData when the user clicks submit.
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     fetchData();
   };
 
