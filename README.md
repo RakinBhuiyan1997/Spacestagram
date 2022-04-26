@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# Spacetagram!
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Welcome to spacetagram! Where you can learn interesting new things about whats happening outside of our earth. This application uses Nasa's API to find all our data!
 
 ## Available Scripts
 
