@@ -42,7 +42,6 @@ const Apod = () => {
     //Once the state has been updated, loading will be turned to false and the data will render on the page.
     setLoading(false);
   };
-  console.log(content);
   //Here is the function that will run fetchData when the user clicks submit.
   //The loading state will be set back to true while we wait for the data to be fetched
   const handleSubmit = async (e) => {
@@ -82,30 +81,28 @@ const Apod = () => {
           </Header>
           <PhotoWrapper>
             {/* Here, the data is mapped and then rendered accordingly */}
-            {/* Note that using indexes as keys are a last resort. They are used here as the data fetched did not have unique ID's associated with it. */}
+
             {content.map((val, index) => {
+              let num = Math.floor(Math.random() * 10000000);
               return (
-                <>
-                  <Container>
-                    <Card>
-                      <CardHeader>
-                        <Image
-                          key={index}
-                          src={val.hdurl ? val.hdurl : val.url}
-                          alt="card__image"
-                          width="600"
-                        />
-                      </CardHeader>
-                      <CardBody>
-                        <h4 key={index}>{val.title}</h4>
-                        <p key={index}>{val.explanation}</p>
-                      </CardBody>
-                      <CardFooter>
-                        <LikeButton />
-                      </CardFooter>
-                    </Card>
-                  </Container>
-                </>
+                <Container key={num}>
+                  <Card>
+                    <CardHeader>
+                      <Image
+                        src={val.hdurl ? val.hdurl : val.url}
+                        alt="card__image"
+                        width="600"
+                      />
+                    </CardHeader>
+                    <CardBody>
+                      <h4>{val.title}</h4>
+                      <p>{val.explanation}</p>
+                    </CardBody>
+                    <CardFooter>
+                      <LikeButton />
+                    </CardFooter>
+                  </Card>
+                </Container>
               );
             })}
           </PhotoWrapper>
@@ -114,6 +111,8 @@ const Apod = () => {
     </>
   );
 };
+
+// In this section below, we have the styled components used to style the application.
 
 const Header = styled.header`
   background-color: #f6f6f7;
