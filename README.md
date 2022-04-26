@@ -2,6 +2,8 @@
 
 Welcome to spacetagram! Where you can learn interesting new things about whats happening outside of our earth. This application uses Nasa's API to find all our data! This project was done as a tech-challenge for Shopify's internship program starting in Fall 2022!
 
+Check out Spactagram here: `https://rakinbhuiyan-spacestagram.netlify.app`
+
 ## Language Used
 
 HTML, CSS, JAVASCRIPT, REACT
