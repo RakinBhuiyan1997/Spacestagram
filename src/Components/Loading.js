@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+
+//This is the loading component. When the data is still being fetched. This component will show an animation of a spinning loading circle.
 const Loading = () => {
   return (
     <Wrapper>

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import LikeButton from "./LikeButton";
 import Loading from "./Loading";
-
 const Apod = () => {
   //Created states to capture data after it is done fetching from our API
   const [content, setContent] = useState([]);
@@ -40,10 +39,12 @@ const Apod = () => {
     const result = await test.json();
     //Once the data is fetched, setContent will set the data into the variable content.
     setContent(result);
+    //Once the state has been updated, loading will be turned to false and the data will render on the page.
     setLoading(false);
   };
-
+  console.log(content);
   //Here is the function that will run fetchData when the user clicks submit.
+  //The loading state will be set back to true while we wait for the data to be fetched
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -80,22 +81,24 @@ const Apod = () => {
             </Form>
           </Header>
           <PhotoWrapper>
-            {content.map((val) => {
-              let num = Math.floor(Math.random() * 10000000);
+            {/* Here, the data is mapped and then rendered accordingly */}
+            {/* Note that using indexes as keys are a last resort. They are used here as the data fetched did not have unique ID's associated with it. */}
+            {content.map((val, index) => {
               return (
                 <>
                   <Container>
-                    <Card key={num}>
+                    <Card>
                       <CardHeader>
                         <Image
+                          key={index}
                           src={val.hdurl ? val.hdurl : val.url}
                           alt="card__image"
                           width="600"
                         />
                       </CardHeader>
                       <CardBody>
-                        <h4>{val.title}</h4>
-                        <p>{val.explanation}</p>
+                        <h4 key={index}>{val.title}</h4>
+                        <p key={index}>{val.explanation}</p>
                       </CardBody>
                       <CardFooter>
                         <LikeButton />

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 
+//This is the like button component.
 const LikeButton = () => {
   const [liked, setLiked] = useState(false);
 
@@ -14,6 +15,7 @@ const LikeButton = () => {
   };
   return (
     <Button onClick={like}>
+      {/* When the user clicks like, the heart Icon is switched to a filled in heart icon. This will switch back when the user clicks on the filled heart again. */}
       {liked && (
         <>
           <Liked>Liked! </Liked>

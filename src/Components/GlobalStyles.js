@@ -1,5 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 
+// I have created global styles inorder to have uniform constant styling throughout my application.
 const GlobalStyles = createGlobalStyle`
 *{
     margin: 0;
