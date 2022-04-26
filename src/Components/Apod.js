@@ -33,7 +33,7 @@ const Apod = () => {
     e.preventDefault();
     fetchData();
   };
-
+  console.log(content);
   return (
     <>
       {loading ? (
@@ -63,17 +63,26 @@ const Apod = () => {
           </Header>
           <PhotoWrapper>
             {content.map((val) => (
-              <ImageBox>
-                <div>
-                  <Image src={val.hdurl ? val.hdurl : val.url} />
-                  <Title>{val.title}</Title>
-                  <Date>Photo Taken: {val.date}</Date>
-                  <Description>
-                    <Span>Description:</Span> {val.explanation}
-                  </Description>
-                </div>
-                <LikeButton />
-              </ImageBox>
+              <>
+                <Container>
+                  <Card>
+                    <CardHeader>
+                      <Image
+                        src={val.hdurl ? val.hdurl : val.url}
+                        alt="card__image"
+                        width="600"
+                      />
+                    </CardHeader>
+                    <CardBody>
+                      <h4>{val.title}</h4>
+                      <p>{val.explanation}</p>
+                    </CardBody>
+                    <CardFooter>
+                      <LikeButton />
+                    </CardFooter>
+                  </Card>
+                </Container>
+              </>
             ))}
           </PhotoWrapper>
         </>
@@ -94,40 +103,34 @@ const PhotoWrapper = styled.div`
   overflow: scroll;
   height: 700px;
 `;
-const ImageBox = styled.div`
-  width: 450px;
-  background-color: #f6f6f7;
+
+const Card = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  background-color: #ffffff;
-  align-items: center;
-  margin: 20px;
-  border-radius: 5px;
-  border: 2px solid #f1f1f2;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  padding-left: 15px;
-  padding-right: 15px;
+  width: clamp(20rem, calc(20rem + 2vw), 22rem);
+  overflow: hidden;
+  box-shadow: 0 0.1rem 1rem rgba(0, 0, 0, 0.1);
+  border-radius: 1em;
+  background: #ece9e6;
+  background: linear-gradient(to right, #ffffff, #ece9e6);
+`;
+const CardHeader = styled.div``;
+const CardBody = styled.div`
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+`;
+const CardFooter = styled.div`
+  display: flex;
+  padding: 1rem;
+  margin-top: auto;
 `;
 const Image = styled.img`
-  width: 100%;
-  height: 300px;
-  margin-bottom: 10px;
-  border-radius: 5px 5px 0px 0px;
-`;
-const Span = styled.span`
-  text-decoration: underline;
-  font-weight: bold;
-`;
-const Title = styled.h2``;
-const Description = styled.p`
-  margin-top: 10px;
-  line-height: 30px;
-`;
-const Date = styled.p`
-  font-style: italic;
-  color: grey;
-  font-weight: bold;
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+  object-fit: cover;
 `;
 
 const Form = styled.form`
@@ -163,6 +166,15 @@ const Button = styled.button`
   :hover {
     border: 1px solid red;
   }
+`;
+
+const Container = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 1200px;
+  gap: 2rem;
+  margin: 2rem;
 `;
 
 export default Apod;
